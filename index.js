@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var app = express();
-//var classes = require('resources/classes.json');
+var classes = require('resources/classes.json');
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
@@ -29,7 +29,7 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         if (event.message && event.message.text) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
-                sendMessage(event.sender.id, {text: "Echo: "/* + classes*/});
+                sendMessage(event.sender.id, {text: "Echo: " + classes});
             }
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
