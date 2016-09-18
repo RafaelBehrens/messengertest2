@@ -2,12 +2,13 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var fs = require('fs');
-var classes = fs.readFileSync('resources/classes.json', 'utf8');
 var app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
+
+var classes = fs.readFileSync('resources/classes.json', 'utf8');
 
 // Server frontpage
 app.get('/', function (req, res) {
