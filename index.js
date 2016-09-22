@@ -34,28 +34,6 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         
-        var class1 =  {
-                "attachment": {
-                    "type": "template",
-                    "payload": {
-                        "template_type": "generic",
-                        "elements": [{
-                            "title": "Kitten",
-                            "subtitle": "Cute kitten picture",
-                            "image_url": imageUrl ,
-                            "buttons": [{
-                                "type": "web_url",
-                                "url": imageUrl,
-                                "title": "Show kitten"
-                                }, {
-                                "type": "postback",
-                                "title": "I like this",
-                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
-                            }]
-                        }]
-                    }
-                }
-            };
         if (event.message && event.message.text) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id, {text: "Echo: " + classes[0].intensity});
@@ -94,7 +72,7 @@ function kittenMessage(recipientId, text) {
     if (values.length === 3 && values[0] === 'kitten') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
             
-            var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
+            var imageUrl = "https://yogaia.com";
             
             message = {
                 "attachment": {
@@ -103,12 +81,12 @@ function kittenMessage(recipientId, text) {
                         "template_type": "generic",
                         "elements": [{
                             "title": "Kitten",
-                            "subtitle": "Cute kitten picture",
+                            "subtitle": "classes[0].intensity",
                             "image_url": imageUrl ,
                             "buttons": [{
                                 "type": "web_url",
                                 "url": imageUrl,
-                                "title": "Show kitten"
+                                "title": classes[0].instructor_name
                                 }, {
                                 "type": "postback",
                                 "title": "I like this",
