@@ -8,7 +8,9 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
 
-var classes = fs.readFileSync('classes.json', 'utf8');
+var classesUnparsed = fs.readFileSync('classes.json', 'utf8');
+
+var classes = JSON.parse(classesUnparsed);
 
 // Server frontpage
 app.get('/', function (req, res) {
@@ -31,7 +33,7 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         if (event.message && event.message.text) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
-                sendMessage(event.sender.id, {text: "Echo: " + classes.intensity});
+                sendMessage(event.sender.id, {text: "Echo: " + classes[0].intensity});
             }
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
