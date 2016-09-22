@@ -34,7 +34,8 @@ app.post('/webhook', function (req, res) {
     for (i = 0; i < events.length; i++) {
         var event = events[i];
         
-        var class1 =  {
+        if (event.message && event.message.text) {
+            message = {
                 "attachment": {
                     "type": "template",
                     "payload": {
@@ -42,23 +43,22 @@ app.post('/webhook', function (req, res) {
                         "elements": [{
                             "title": "Kitten",
                             "subtitle": "Cute kitten picture",
-                            "image_url": "www.yogaia.com" ,
+                            "image_url": "www.google.com" ,
                             "buttons": [{
                                 "type": "web_url",
-                                "url": "www.yogaia.com",
+                                "url": "www.google.com",
                                 "title": "Show kitten"
                                 }, {
                                 "type": "postback",
                                 "title": "I like this",
-                                "payload": "User " + recipientId + " likes kitten " + "www.yogaia.com",
+                                "payload": "User " + recipientId + " likes kitten " + "www.google.com",
                             }]
                         }]
                     }
                 }
             };
-        if (event.message && event.message.text) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
-                sendMessage(event.sender.id, class1);
+                sendMessage(event.sender.id, {text: "Echo: " + classes[0].intensity});
             }
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
