@@ -89,7 +89,7 @@ function kittenMessage(recipientId, text) {
                                 "title": "Book"
                                 }, {
                                 "type": "postback",
-                                "title": "I like this",
+                                "title": "Share",
                                 "payload": "User " + recipientId + " likes kitten " + imageUrl,
                             }]
                         }]
