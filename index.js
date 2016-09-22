@@ -81,7 +81,7 @@ function kittenMessage(recipientId, text) {
                         "template_type": "generic",
                         "elements": [{
                             "title": "Kitten",
-                            "subtitle": "classes[0].intensity",
+                            "subtitle": classes[0].intensity,
                             "image_url": imageUrl ,
                             "buttons": [{
                                 "type": "web_url",
