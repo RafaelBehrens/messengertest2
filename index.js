@@ -33,7 +33,32 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         if (event.message && event.message.text) {
             if (!kittenMessage(event.sender.id, event.message.text)) {
-                sendMessage(event.sender.id, {text: "Echo: " + classes[0].intensity});
+                var imageUrl = "https://placekitten.com/" + Number(values[1]) + "/" + Number(values[2]);
+            
+                message = {
+                    "attachment": {
+                        "type": "template",
+                        "payload": {
+                            "template_type": "generic",
+                            "elements": [{
+                                "title": "Kitten",
+                                "subtitle": "Cute kitten picture",
+                                "image_url": imageUrl ,
+                                "buttons": [{
+                                    "type": "web_url",
+                                    "url": imageUrl,
+                                    "title": "Show kitten"
+                                    }, {
+                                    "type": "postback",
+                                    "title": "I like this",
+                                    "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                                }]
+                            }]
+                        }
+                    }
+                };
+                
+                sendMessage(event.sender.id, message);
             }
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
