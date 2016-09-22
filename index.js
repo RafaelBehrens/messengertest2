@@ -72,7 +72,7 @@ function kittenMessage(recipientId, text) {
     if (values.length === 3 && values[0] === 'kitten') {
         if (Number(values[1]) > 0 && Number(values[2]) > 0) {
             
-            var imageUrl = "https://yogaia.com";
+            var imageUrl = "https://yogaia.com/view/" + classes[0].id;
             
             message = {
                 "attachment": {
