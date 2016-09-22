@@ -1,1 +1,9 @@
-just fucking testing
+[  
+   {  
+      "location_str":"London",
+      "sticky":"",
+      "intensity":3,
+      "is_favorite":0,
+      "instructor_img":"/media/Emily.jpg"
+   }
+]
