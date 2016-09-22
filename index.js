@@ -92,7 +92,7 @@ function kittenMessage(recipientId, text) {
                                 "title": "Share",
                                 "payload": "User " + recipientId + " likes kitten " + imageUrl,
                             }]
-                        }]
+                        }, {
                         "elements": [{
                             "title": classes[0].name,
                             "subtitle": classes[0].description,
@@ -105,8 +105,8 @@ function kittenMessage(recipientId, text) {
                                 "type": "postback",
                                 "title": "Share",
                                 "payload": "User " + recipientId + " likes kitten " + imageUrl,
-                            }]
-                    }
+                            }],
+                    }]
                 }
             };
     
