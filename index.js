@@ -8,7 +8,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
 
-var classes = fs.readFileSync('resources/classes.txt', 'utf8');
+var classes = fs.readFileSync('test.txt', 'utf8');
 
 // Server frontpage
 app.get('/', function (req, res) {
