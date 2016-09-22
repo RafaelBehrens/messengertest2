@@ -93,12 +93,6 @@ function kittenMessage(recipientId, text) {
                                 "payload": "User " + recipientId + " likes kitten " + imageUrl,
                             }]
                         }]
-                    }
-                }
-                "attachment": {
-                    "type": "template",
-                    "payload": {
-                        "template_type": "generic",
                         "elements": [{
                             "title": classes[0].name,
                             "subtitle": classes[0].description,
@@ -112,8 +106,8 @@ function kittenMessage(recipientId, text) {
                                 "title": "Share",
                                 "payload": "User " + recipientId + " likes kitten " + imageUrl,
                             }]
-                        }]
                     }
+                }
             };
     
             sendMessage(recipientId, message);
