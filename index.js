@@ -93,8 +93,7 @@ function kittenMessage(recipientId, text) {
                                 "payload": "User " + recipientId + " likes kitten " + imageUrl,
                             }]
                         }, {
-                        "elements": [{
-                            "title": classes[0].name,
+                        	"title": classes[0].name,
                             "subtitle": classes[0].description,
                             "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
                             "buttons": [{
@@ -106,7 +105,8 @@ function kittenMessage(recipientId, text) {
                                 "title": "Share",
                                 "payload": "User " + recipientId + " likes kitten " + imageUrl,
                             }],
-                    }]
+                        }]
+                    }
                 }
             };
     
