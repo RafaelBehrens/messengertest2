@@ -86,7 +86,7 @@ function kittenMessage(recipientId, text) {
                             "buttons": [{
                                 "type": "web_url",
                                 "url": imageUrl,
-                                "title": classes[0].instructor_name
+                                "title": "Book"
                                 }, {
                                 "type": "postback",
                                 "title": "I like this",
