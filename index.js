@@ -82,7 +82,7 @@ function kittenMessage(recipientId, text) {
                         "elements": [{
                             "title": classes[0].name,
                             "subtitle": classes[0].description,
-                            "image_url": imageUrl ,
+                            "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
                             "buttons": [{
                                 "type": "web_url",
                                 "url": imageUrl,
