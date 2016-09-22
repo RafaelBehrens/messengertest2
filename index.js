@@ -95,6 +95,25 @@ function kittenMessage(recipientId, text) {
                         }]
                     }
                 }
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [{
+                            "title": classes[0].name,
+                            "subtitle": classes[0].description,
+                            "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
+                            "buttons": [{
+                                "type": "web_url",
+                                "url": imageUrl,
+                                "title": "Book"
+                                }, {
+                                "type": "postback",
+                                "title": "Share",
+                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                            }]
+                        }]
+                    }
             };
     
             sendMessage(recipientId, message);
