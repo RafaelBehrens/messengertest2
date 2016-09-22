@@ -42,15 +42,15 @@ app.post('/webhook', function (req, res) {
                         "elements": [{
                             "title": "Kitten",
                             "subtitle": "Cute kitten picture",
-                            "image_url": imageUrl ,
+                            "image_url": "www.yogaia.com" ,
                             "buttons": [{
                                 "type": "web_url",
-                                "url": imageUrl,
+                                "url": "www.yogaia.com",
                                 "title": "Show kitten"
                                 }, {
                                 "type": "postback",
                                 "title": "I like this",
-                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                                "payload": "User " + recipientId + " likes kitten " + "www.yogaia.com",
                             }]
                         }]
                     }
