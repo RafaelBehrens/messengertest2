@@ -93,9 +93,9 @@ function kittenMessage(recipientId, text) {
                                 "payload": "User " + recipientId + " likes kitten " + imageUrl,
                             }]
                         }, {
-                        	"title": classes[1].name,
-                            "subtitle": classes[1].description,
-                            "image_url": "https://yogaia.com/" + classes[1].instructor_img ,
+                        	"title": classes[0].name,
+                            "subtitle": classes[0].description,
+                            "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
                             "buttons": [{
                                 "type": "web_url",
                                 "url": imageUrl,
