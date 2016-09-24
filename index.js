@@ -2,6 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var fs = require('fs');
+var schedule = require('node-schedule');
 var app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -35,7 +36,7 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         
         if (event.message && event.message.text) {
-            if (!kittenMessage(event.sender.id, event.message.text)) {
+            if (!classdatasend(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id, {text: "Echo: " + classes[0].intensity});
             }
         } else if (event.postback) {
@@ -63,59 +64,48 @@ function sendMessage(recipientId, message) {
         }
     });
 };
-// send rich message with kitten
-function kittenMessage(recipientId, text) {
-    
-    text = text || "";
-    var values = text.split(' ');
-    
-    if (values.length === 3 && values[0] === 'kitten') {
-        if (Number(values[1]) > 0 && Number(values[2]) > 0) {
+// send class data
+function classdatasend(recipientId, text) {
             
-            var imageUrl = "https://yogaia.com/view/" + classes[0].id;
+    var imageUrl = "https://yogaia.com/view/" + classes[0].id;
             
-            message = {
-                "attachment": {
-                    "type": "template",
-                    "payload": {
-                        "template_type": "generic",
-                        "elements": [{
-                            "title": classes[0].name,
-                            "subtitle": classes[0].description,
-                            "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
-                            "buttons": [{
-                                "type": "web_url",
-                                "url": imageUrl,
-                                "title": "Book"
-                                }, {
-                                "type": "postback",
-                                "title": "Share",
-                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
-                            }]
+    message = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": [{
+                    "title": classes[0].name,
+                    "subtitle": classes[0].description,
+                    "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": imageUrl,
+                        "title": "Book"
                         }, {
-                        	"title": classes[1].name,
-                            "subtitle": classes[1].description,
-                            "image_url": "https://yogaia.com/" + classes[1].instructor_img ,
-                            "buttons": [{
-                                "type": "web_url",
-                                "url": imageUrl,
-                                "title": "Book"
-                                }, {
-                                "type": "postback",
-                                "title": "Share",
-                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
-                            }],
-                        }]
-                    }
-                }
-            };
-    
-            sendMessage(recipientId, message);
-            
-            return true;
+                        "type": "postback",
+                        "title": "Share",
+                        "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                    }]
+                }, {
+                    "title": classes[1].name,
+                    "subtitle": classes[1].description,
+                    "image_url": "https://yogaia.com/" + classes[1].instructor_img ,
+                    "buttons": [{
+                        "type": "web_url",
+                        "url": imageUrl,
+                        "title": "Book"
+                        }, {
+                        "type": "postback",
+                        "title": "Share",
+                        "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                    }],
+                }]
+            }
         }
-    }
+    };
     
-    return false;
-    
-};
+    sendMessage(recipientId, message);
+            
+    return true;
+}
