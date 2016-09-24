@@ -75,24 +75,35 @@ function classdatasend(recipientId, text) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                	for (i = 0; i < classes.length; i++) {
-                    	"title": classes[i].name,
-                    	"subtitle": classes[i].description,
-                    	"image_url": "https://yogaia.com/" + classes[i].instructor_img ,
-                    	"buttons": [{
-                        "type": "web_url",
-                        "url": imageUrl,
-                        "title": "Book"
-                        }, {
-                        "type": "postback",
-                        "title": "Share",
-                        "payload": "User " + recipientId + " likes kitten " + imageUrl,
-                    	}]
-                    }
-                }]
+                        "title": classes[0].name,
+                        "subtitle": classes[0].description,
+                        "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
+                        "buttons": [{
+                            "type": "web_url",
+                            "url": imageUrl,
+                            "title": "Book"
+                            }, {
+                            "type": "postback",
+                            "title": "Share",
+                            "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                        }]
+                    }, {
+                        "title": classes[1].name,
+                        "subtitle": classes[1].description,
+                        "image_url": "https://yogaia.com/" + classes[1].instructor_img ,
+                        "buttons": [{
+                            "type": "web_url",
+                            "url": imageUrl,
+                            "title": "Book"
+                            }, {
+                            "type": "postback",
+                            "title": "Share",
+                            "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                        }],
+                    }]
+                }
             }
-        }
-    };
+        };
     
     sendMessage(recipientId, message);
             
