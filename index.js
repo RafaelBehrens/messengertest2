@@ -108,4 +108,4 @@ function classdatasend(recipientId, text) {
     sendMessage(recipientId, message);
             
     return true;
-}
+};
