@@ -15,6 +15,16 @@ var classesUnparsed = fs.readFileSync('classes.json', 'utf8');
 //parse JSON appropriately
 var classes = JSON.parse(classesUnparsed);
 
+//load JSON 
+var classestwo;
+
+
+request("https://yogaia.com/api/lessons?upcoming=0&limit=10", function(error, response, data) {
+    classestwo = data;
+});
+
+
+
 // Server frontpage
 app.get('/', function (req, res) {
     res.send('This is a Messenger Bot Server, you can not access this here! :(');
@@ -68,6 +78,8 @@ function sendMessage(recipientId, message) {
 function classdatasend(recipientId, text) {
             
     var imageUrl = "https://yogaia.com/view/" + classes[0].id;
+        
+    
             
     message = {
         "attachment": {
@@ -75,7 +87,7 @@ function classdatasend(recipientId, text) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                        "title": classes[0].name,
+                        "title": classestwo[0].name,
                         "subtitle": classes[0].description,
                         "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
                         "buttons": [{
@@ -109,3 +121,4 @@ function classdatasend(recipientId, text) {
             
     return true;
 }
+
