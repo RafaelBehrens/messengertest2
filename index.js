@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var fs = require('fs');
-var schedule = require('node-schedule');
+var CronJob = require('cron').Cronjob;
 var app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -185,12 +185,12 @@ function classdatasend(recipientId, text) {
     return true;
 }
 
-//scheduled message test
-var rule = new schedule.RecurrenceRule();
-
-rule.minute = 3;
-
-var j = schedule.ScheduleJob(rule, function(){
-	sendMessage(recipientId, "testing");
-}
-
+//schedule test
+var job = new cronJob({
+	cronTime: '30 00 00 * * *',
+	onTick: function() {
+		sendMessage(recipientId, "hello");
+	}
+	start: false, 
+	timeZone: "America/Los_Angeles" 
+});
