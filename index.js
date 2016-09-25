@@ -185,14 +185,15 @@ function classdatasend(recipientId, text) {
     return true;
 }
 
-//schedule test
-var job = new CronJob('20 00 00 * * *', function() {
-  sendMessage(recipientId, "successfully scheduled");
-  console.log('cronjob scheduled')
-  }, function () {
-    /* This function is executed when the job stops */
+
+var CronJob = require('cron').CronJob;
+var job = new CronJob({
+  cronTime: '00 00 00 * * * ',
+  onTick: function() {
+    sendMessage(recipientId, 'successfully scheduled');
+  	console.log('cronjob scheduled')
   },
-  start: true /* Start the job right now */
-);
+  start: true
+});
 
 job.start();
