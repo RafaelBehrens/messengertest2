@@ -190,7 +190,7 @@ var job = new cronJob({
 	cronTime: '30 00 00 * * *',
 	onTick: function() {
 		sendMessage(recipientId, "hello");
-	}
+	},
 	start: false, 
 	timeZone: "America/Los_Angeles" 
 });
