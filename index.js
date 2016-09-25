@@ -191,7 +191,7 @@ var job = new CronJob({
   cronTime: '30 00 00 * * * ',
   onTick: function() {
     sendMessage(recipientId, 'successfully scheduled');
-  	console.log('cronjob scheduled')
+  	console.log('cronjob scheduled');
   },
   start: true
 });
