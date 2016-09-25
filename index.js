@@ -62,7 +62,7 @@ app.post('/webhook', function (req, res) {
     res.sendStatus(200);
 });
 
-sendTextMessage(recipientId, "Hello, how can i help you ? ")
+sendTextMessage(recipientId, "Hello, how can i help you?");
 
 // send class data
 function classdatasend(recipientId, text) {
