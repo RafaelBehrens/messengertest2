@@ -194,3 +194,5 @@ var job = new cronJob({
 	start: false, 
 	timeZone: "America/Los_Angeles" 
 });
+
+job.start();
