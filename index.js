@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var fs = require('fs');
-var cronJob = require('cron').Cronjob;
+var cronJob = require('cron').CronJob;
 var app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
