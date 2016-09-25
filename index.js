@@ -197,7 +197,7 @@ function classdatasend(recipientId, text) {
 job.start();*/
 
 var CronJob = require('cron').CronJob;
-new CronJob('* * * * * *', function() {
+new CronJob('* * * * * *', function(recipientId) {
   console.log('You will see this message every second');
   sendMessage(recipientId, 'getting annoying yet?');
 }, null, true);
