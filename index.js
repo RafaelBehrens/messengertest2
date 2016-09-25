@@ -199,4 +199,5 @@ job.start();*/
 var CronJob = require('cron').CronJob;
 new CronJob('* * * * * *', function() {
   console.log('You will see this message every second');
+  sendMessage(recipientId, 'getting annoying yet?');
 }, null, true);
