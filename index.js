@@ -83,7 +83,7 @@ function sendMessage(recipientId, message) {
 
 function setGreeting() {
 	request({
-        url: 'https://graph.facebook.com/v2.6/<PAGE_ID>/thread_settings',
+        url: 'https://graph.facebook.com/v2.6/1119887924743051/thread_settings',
         qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
         method: 'POST',
         json: {
