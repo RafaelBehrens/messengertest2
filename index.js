@@ -79,7 +79,9 @@ function sendMessage(recipientId, message) {
             console.log('Error: ', response.body.error);
         }
     });
-};send class data
+};
+
+//send class dats
 function classdatasend(recipientId, text) {
             
             
