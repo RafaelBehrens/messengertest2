@@ -185,7 +185,7 @@ function classdatasend(recipientId, text) {
     return true;
 }
 
-var job = new CronJob({
+/*var job = new CronJob({
   cronTime: '30 00 00 * * * ',
   onTick: function() {
     sendMessage(recipientId, 'successfully scheduled');
@@ -194,4 +194,9 @@ var job = new CronJob({
   start: true
 });
 
-job.start();
+job.start();*/
+
+var CronJob = require('cron').CronJob;
+new CronJob('* * * * * *', function() {
+  console.log('You will see this message every second');
+}, null, true);
