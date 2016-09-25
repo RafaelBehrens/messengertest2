@@ -81,7 +81,7 @@ function sendMessage(recipientId, message) {
     });
 };
 
-function setGreeting(recipientId, message) {
+function setGreeting() {
 	request({
         url: 'https://graph.facebook.com/v2.6/me/messages',
         qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
@@ -99,9 +99,11 @@ function setGreeting(recipientId, message) {
             console.log('Error: ', response.body.error);
         }
     });
-}
+};
 
-//send class dats
+setGreeting();
+
+//send class data
 function classdatasend(recipientId, text) {
             
             
