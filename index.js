@@ -20,7 +20,7 @@ var classes;*/
 
 //url for classes JSON
 var url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10';
-
+=
 //get JSON, parse it and store it in classes variable
 request(url, (error, response, body)=> {
   if (!error && response.statusCode === 200) {
@@ -114,7 +114,7 @@ function classdatasend(recipientId, text) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                        "title": classes[0].name,
+                        "title": classes[0].name + classes[0].start_time,
                         "subtitle": classes[0].description,
                         "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
                         "buttons": [{
