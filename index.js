@@ -17,8 +17,11 @@ var classes = JSON.parse(classesUnparsed);
 
 //load JSON from URL
 var classes;*/
+
+//url for classes JSON
 var url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10';
 
+//get JSON, parse it and store it in classes variable
 request(url, (error, response, body)=> {
   if (!error && response.statusCode === 200) {
     classes = JSON.parse(body)
@@ -82,14 +85,7 @@ function classdatasend(recipientId, text) {
             
     var imageUrl = "https://yogaia.com/view/" + classes[0].id;
         
-    
-            
-    message = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [{
+    var test = [{
                         "title": classes[0].name,
                         "subtitle": classes[0].description,
                         "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
@@ -115,7 +111,14 @@ function classdatasend(recipientId, text) {
                             "title": "Share",
                             "payload": "User " + recipientId + " likes kitten " + imageUrl,
                         }],
-                    }]
+                    }];
+            
+    message = {
+        "attachment": {
+            "type": "template",
+            "payload": {
+                "template_type": "generic",
+                "elements": test
                 }
             }
         };
