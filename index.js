@@ -117,6 +117,7 @@ function classdatasend(recipientId, text) {
                             "type": "postback",
                             "title": "Share",
                             "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                        }]
                     }, {
                         "title": classes[2].name,
                         "subtitle": classes[2].description,
