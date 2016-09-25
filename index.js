@@ -192,8 +192,7 @@ var job = new CronJob('20 00 00 * * *', function() {
   }, function () {
     /* This function is executed when the job stops */
   },
-  true, /* Start the job right now */
-  timeZone /* Time zone of this job. */
+  start: true /* Start the job right now */
 );
 
 job.start();
