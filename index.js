@@ -9,20 +9,29 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
 
-//load unparsed JSON w class info 
+/*//load unparsed JSON w class info 
 var classesUnparsed = fs.readFileSync('classes.json', 'utf8');
 
 //parse JSON appropriately
-var classes = JSON.parse(classesUnparsed);
+var classes = JSON.parse(classesUnparsed);*/
 
-//load JSON 
-var classestwo;
+//load JSON from URL
+var classes;
+var url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10';
 
+http.get(url, function(res){
+    var body = '';
 
-request("https://yogaia.com/api/lessons?upcoming=0&limit=10", function(error, response, data) {
-    classestwo = data;
+    res.on('data', function(chunk){
+        body += chunk;
+    });
+
+    res.on('end', function(){
+        classes = JSON.parse(body);
+    });
+}).on('error', function(e){
+      console.log("Got an error: ", e);
 });
-
 
 
 // Server frontpage
@@ -87,7 +96,7 @@ function classdatasend(recipientId, text) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                        "title": classestwo[0].name,
+                        "title": classes[0].name,
                         "subtitle": classes[0].description,
                         "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
                         "buttons": [{
