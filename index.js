@@ -79,9 +79,7 @@ function sendMessage(recipientId, message) {
             console.log('Error: ', response.body.error);
         }
     });
-};
-
-// send class data
+};send class data
 function classdatasend(recipientId, text) {
             
             
@@ -101,7 +99,7 @@ function classdatasend(recipientId, text) {
                             }, {
                             "type": "postback",
                             "title": "Share",
-                            "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                            "payload": "User " + recipientId + " clicked button",
                         }]
                     }, {
                         "title": classes[1].name,
@@ -114,7 +112,7 @@ function classdatasend(recipientId, text) {
                             }, {
                             "type": "postback",
                             "title": "Share",
-                            "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                            "payload": "User " + recipientId + " clicked button",
                         }]
                     }, {
                         "title": classes[2].name,
@@ -122,12 +120,12 @@ function classdatasend(recipientId, text) {
                         "image_url": "https://yogaia.com/" + classes[2].instructor_img ,
                         "buttons": [{
                             "type": "web_url",
-                            "url": "https://yogaia.com/view/" + classes[2].idl,
+                            "url": "https://yogaia.com/view/" + classes[2].id,
                             "title": "Book"
                             }, {
                             "type": "postback",
                             "title": "Share",
-                            "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                            "payload": "User " + recipientId + " clicked button",
                         }],
                     }]
                 }
