@@ -2,7 +2,7 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var fs = require('fs');
-var cronJob = require('cron').CronJob;
+var CronJob = require('cron').CronJob;
 var app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
@@ -186,14 +186,14 @@ function classdatasend(recipientId, text) {
 }
 
 //schedule test
-var job = new cronJob({
-	cronTime: '30 00 00 * * *',
-	onTick: function() {
-		sendMessage(recipientId, "hello");
-		console.log('successfully scheduled cronjob');
-	},
-	start: false, 
-	timeZone: "America/Los_Angeles" 
-});
+var job = new CronJob('20 00 00 * * *', function() {
+  sendMessage(recipientId, "successfully scheduled");
+  console.log('cronjob scheduled')
+  }, function () {
+    /* This function is executed when the job stops */
+  },
+  true, /* Start the job right now */
+  timeZone /* Time zone of this job. */
+);
 
 job.start();
