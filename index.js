@@ -25,7 +25,7 @@ var url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10';
 request(url, (error, response, body)=> {
   if (!error && response.statusCode === 200) {
     classes = JSON.parse(body)
-    console.log("Got a response: ", classes)
+    console.log("Got a response")
   } else {
     console.log("Got an error: ", error, ", status code: ", response.statusCode)
   }
@@ -188,7 +188,7 @@ function classdatasend(recipientId, text) {
 
 var CronJob = require('cron').CronJob;
 var job = new CronJob({
-  cronTime: '00 00 00 * * * ',
+  cronTime: '30 00 00 * * * ',
   onTick: function() {
     sendMessage(recipientId, 'successfully scheduled');
   	console.log('cronjob scheduled')
