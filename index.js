@@ -101,6 +101,8 @@ function setGreeting() {
     });
 };
 
+setGreeting();
+
 
 //send class data
 function classdatasend(recipientId, text) {
