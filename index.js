@@ -81,8 +81,6 @@ function sendMessage(recipientId, message) {
     });
 };
 
-sendMessage(recipientId, "Hello, how can i help you?");
-
 // send class data
 function classdatasend(recipientId, text) {
             
