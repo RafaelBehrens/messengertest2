@@ -114,7 +114,7 @@ function classdatasend(recipientId, text) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                        "title": classes[0].name + classes[0].start_time,
+                        "title": classes[0].name + " " + classes[0].start_time,
                         "subtitle": classes[0].description,
                         "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
                         "buttons": [{
