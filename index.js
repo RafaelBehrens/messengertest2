@@ -81,6 +81,26 @@ function sendMessage(recipientId, message) {
     });
 };
 
+function setGreeting(recipientId, message) {
+	request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+        method: 'POST',
+        json: {
+            "setting_type": "greeting",
+            "greeting":{
+            	"text": "Hi {{user_first_name}}, I'm a prototype bot by Yoga.ai. I'm currently a bit unsophisticated, but I'll try and let you know the day's upcoming live classes."
+            }
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending message: ', error);
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error);
+        }
+    });
+}
+
 //send class dats
 function classdatasend(recipientId, text) {
             
