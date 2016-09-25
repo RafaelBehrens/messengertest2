@@ -16,11 +16,8 @@ var classesUnparsed = fs.readFileSync('classes.json', 'utf8');
 var classes = JSON.parse(classesUnparsed);
 
 //load JSON from URL
-var classes;
-var url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10';*/
-
-const request = require('request')
-     ,url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10'
+var classes;*/
+var url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10';
 
 request(url, (error, response, body)=> {
   if (!error && response.statusCode === 200) {
