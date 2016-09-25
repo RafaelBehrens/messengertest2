@@ -62,42 +62,8 @@ app.post('/webhook', function (req, res) {
     res.sendStatus(200);
 });
 
-// generic function sending messages
-function sendMessage(recipientId, message) {
-    request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-        method: 'POST',
-        json: {
-            recipient: {id: recipientId},
-            message: message,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending message: ', error);
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error);
-        }
-    });
-};
-function startedConv(recipientId){
-	var name;
+sendTextMessage(recipientId, "Hello, how can i help you ? ")
 
-	request({
-        url: 'https://graph.facebook.com/v2.6/'+ recipientId +'?fields=first_name',
-        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-        method: 'GET'
-    }, function(error, response, body) {
-    	if (error) {
-            console.log('Error sending message: ', error);
-            } else if (response.body.error) {
-                console.log('Error: ', response.body.error);
-            }else{
-                name = JSON.parse(body);
-                sendTextMessage(recipientId, "Hello "+ name.first_name+", how can i help you ? ")
-            }
-    	});
-}
 // send class data
 function classdatasend(recipientId, text) {
             
