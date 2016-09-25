@@ -13,26 +13,23 @@ app.listen((process.env.PORT || 3000));
 var classesUnparsed = fs.readFileSync('classes.json', 'utf8');
 
 //parse JSON appropriately
-var classes = JSON.parse(classesUnparsed);*/
+var classes = JSON.parse(classesUnparsed);
 
 //load JSON from URL
 var classes;
-var url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10';
+var url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10';*/
 
-http.get(url, function(res){
-    var body = '';
+const request = require('request')
+     ,url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10'
 
-    res.on('data', function(chunk){
-        body += chunk;
-    });
-
-    res.on('end', function(){
-        classes = JSON.parse(body);
-    });
-}).on('error', function(e){
-      console.log("Got an error: ", e);
-});
-
+request(url, (error, response, body)=> {
+  if (!error && response.statusCode === 200) {
+    classes = JSON.parse(body)
+    console.log("Got a response: ", classes)
+  } else {
+    console.log("Got an error: ", error, ", status code: ", response.statusCode)
+  }
+})
 
 // Server frontpage
 app.get('/', function (req, res) {
