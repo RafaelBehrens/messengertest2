@@ -185,8 +185,6 @@ function classdatasend(recipientId, text) {
     return true;
 }
 
-
-var CronJob = require('cron').CronJob;
 var job = new CronJob({
   cronTime: '30 00 00 * * * ',
   onTick: function() {
