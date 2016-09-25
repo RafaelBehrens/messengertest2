@@ -103,6 +103,29 @@ function setGreeting() {
 
 setGreeting();
 
+//add get started button for first use
+/*function setStartButton() {
+	request({
+        url: 'https://graph.facebook.com/v2.6/1119887924743051/thread_settings',
+        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+        method: 'POST',
+        json: {
+            "setting_type":"call_to_actions",
+  			"thread_state":"new_thread",
+  			"call_to_actions":[{
+      			"payload":"USER_DEFINED_PAYLOAD"
+    		}]
+            }
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending message: ', error);
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error);
+        }
+    });
+};*/
+
 
 //send class data
 function classdatasend(recipientId, text) {
@@ -114,8 +137,8 @@ function classdatasend(recipientId, text) {
             "payload": {
                 "template_type": "generic",
                 "elements": [{
-                        "title": classes[0].name + " " + classes[0].start_time,
-                        "subtitle": classes[0].instructor_name + " - "+ classes[0].description,
+                        "title": classes[0].name + " - " + classes[0].instructor_name + " - " + classes[0].start_time,
+                        "subtitle": classes[0].description,
                         "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
                         "buttons": [{
                             "type": "web_url",
@@ -160,5 +183,14 @@ function classdatasend(recipientId, text) {
     sendMessage(recipientId, message);
             
     return true;
+}
+
+//scheduled message test
+var rule = new schedule.RecurrenceRule();
+
+rule.second = 42;
+
+var j = schedule.ScheduleJob(rule, function(){
+	sendMessage(recipientId, "testing");
 }
 
