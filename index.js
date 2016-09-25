@@ -83,9 +83,6 @@ function sendMessage(recipientId, message) {
 // send class data
 function classdatasend(recipientId, text) {
             
-    var imageUrl = "https://yogaia.com/view/" + classes[0].id;
-        
-    var test = 
             
     message = {
         "attachment": {
@@ -98,7 +95,7 @@ function classdatasend(recipientId, text) {
                         "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
                         "buttons": [{
                             "type": "web_url",
-                            "url": imageUrl,
+                            "url": "https://yogaia.com/view/" + classes[0].id,
                             "title": "Book"
                             }, {
                             "type": "postback",
@@ -111,7 +108,7 @@ function classdatasend(recipientId, text) {
                         "image_url": "https://yogaia.com/" + classes[1].instructor_img ,
                         "buttons": [{
                             "type": "web_url",
-                            "url": imageUrl,
+                            "url": "https://yogaia.com/view/" + classes[1].id,
                             "title": "Book"
                             }, {
                             "type": "postback",
@@ -124,7 +121,7 @@ function classdatasend(recipientId, text) {
                         "image_url": "https://yogaia.com/" + classes[2].instructor_img ,
                         "buttons": [{
                             "type": "web_url",
-                            "url": imageUrl,
+                            "url": "https://yogaia.com/view/" + classes[2].idl,
                             "title": "Book"
                             }, {
                             "type": "postback",
