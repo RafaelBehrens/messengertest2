@@ -188,7 +188,7 @@ function classdatasend(recipientId, text) {
 //scheduled message test
 var rule = new schedule.RecurrenceRule();
 
-rule.second = 42;
+rule.minute = 3;
 
 var j = schedule.ScheduleJob(rule, function(){
 	sendMessage(recipientId, "testing");
