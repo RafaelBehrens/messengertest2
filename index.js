@@ -115,7 +115,7 @@ function classdatasend(recipientId, text) {
                 "template_type": "generic",
                 "elements": [{
                         "title": classes[0].name + " " + classes[0].start_time,
-                        "subtitle": classes[0].instructor_name + classes[0].description,
+                        "subtitle": classes[0].instructor_name + " - "+ classes[0].description,
                         "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
                         "buttons": [{
                             "type": "web_url",
