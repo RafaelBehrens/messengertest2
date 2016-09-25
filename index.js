@@ -72,6 +72,7 @@ function sendMessage(recipientId, message) {
             recipient: {id: recipientId},
             message: message,
         }
+        console.log('user id is recipientId');
     }, function(error, response, body) {
         if (error) {
             console.log('Error sending message: ', error);
@@ -145,9 +146,7 @@ function classdatasend(recipientId, text) {
                             "url": "https://yogaia.com/view/" + classes[0].id,
                             "title": "Book"
                             }, {
-                            "type": "postback",
-                            "title": "Share",
-                            "payload": "User " + recipientId + " clicked button",
+                            "type": "element_share"
                         }]
                     }, {
                         "title": classes[1].name,
@@ -158,9 +157,7 @@ function classdatasend(recipientId, text) {
                             "url": "https://yogaia.com/view/" + classes[1].id,
                             "title": "Book"
                             }, {
-                            "type": "postback",
-                            "title": "Share",
-                            "payload": "User " + recipientId + " clicked button",
+                            "type": "element_share"
                         }]
                     }, {
                         "title": classes[2].name,
@@ -171,9 +168,7 @@ function classdatasend(recipientId, text) {
                             "url": "https://yogaia.com/view/" + classes[2].id,
                             "title": "Book"
                             }, {
-                            "type": "postback",
-                            "title": "Share",
-                            "payload": "User " + recipientId + " clicked button",
+                            "type": "element_share"
                         }],
                     }]
                 }
@@ -196,9 +191,7 @@ function classdatasend(recipientId, text) {
 
 job.start();*/
 
-var job = new CronJob('* * * * * *', function(recipientId) {
+new CronJob('* * * * * *', function(recipientId) {
   console.log('You will see this message every second');
   sendMessage(recipientId, 'getting annoying yet?');
 }, null, true);
-
-job.start();
