@@ -189,9 +189,10 @@ function classdatasend(recipientId, text) {
   start: true
 });
 
-job.start();*/
+job.start();
 
 new CronJob('* * * * * *', function(recipientId) {
   console.log('You will see this message every second');
   sendMessage(recipientId, 'getting annoying yet?');
 }, null, true);
+*/
