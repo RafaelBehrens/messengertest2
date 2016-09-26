@@ -2,34 +2,18 @@ var express = require('express');
 var bodyParser = require('body-parser');
 var request = require('request');
 var fs = require('fs');
-var CronJob = require('cron').CronJob;
+var schedule = require('node-schedule');
 var app = express();
 
 app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
 
-/*//load unparsed JSON w class info 
+//load unparsed JSON w class info 
 var classesUnparsed = fs.readFileSync('classes.json', 'utf8');
 
 //parse JSON appropriately
 var classes = JSON.parse(classesUnparsed);
-
-//load JSON from URL
-var classes;*/
-
-//url for classes JSON
-var url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10';
-
-//get JSON, parse it and store it in classes variable
-request(url, (error, response, body)=> {
-  if (!error && response.statusCode === 200) {
-    classes = JSON.parse(body)
-    console.log("Got a response")
-  } else {
-    console.log("Got an error: ", error, ", status code: ", response.statusCode)
-  }
-})
 
 // Server frontpage
 app.get('/', function (req, res) {
@@ -52,7 +36,7 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         
         if (event.message && event.message.text) {
-            if (!classdatasend(event.sender.id, event.message.text)) {
+            if (!kittenMessage(event.sender.id, event.message.text)) {
                 sendMessage(event.sender.id, {text: "Echo: " + classes[0].intensity});
             }
         } else if (event.postback) {
@@ -72,7 +56,6 @@ function sendMessage(recipientId, message) {
             recipient: {id: recipientId},
             message: message,
         }
-        console.log('user id is recipientId');
     }, function(error, response, body) {
         if (error) {
             console.log('Error sending message: ', error);
@@ -81,118 +64,59 @@ function sendMessage(recipientId, message) {
         }
     });
 };
-
-function setGreeting() {
-	request({
-        url: 'https://graph.facebook.com/v2.6/1119887924743051/thread_settings',
-        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-        method: 'POST',
-        json: {
-            "setting_type": "greeting",
-            "greeting":{
-            	"text": "Hi {{user_first_name}}, I'm a prototype bot by Yoga.ai. I'm currently a bit unsophisticated, but I'll try and let you know the day's upcoming live classes."
-            }
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending message: ', error);
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error);
-        }
-    });
-};
-
-setGreeting();
-
-//add get started button for first use
-/*function setStartButton() {
-	request({
-        url: 'https://graph.facebook.com/v2.6/1119887924743051/thread_settings',
-        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-        method: 'POST',
-        json: {
-            "setting_type":"call_to_actions",
-  			"thread_state":"new_thread",
-  			"call_to_actions":[{
-      			"payload":"USER_DEFINED_PAYLOAD"
-    		}]
-            }
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending message: ', error);
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error);
-        }
-    });
-};*/
-
-
-//send class data
-function classdatasend(recipientId, text) {
-            
-            
-    message = {
-        "attachment": {
-            "type": "template",
-            "payload": {
-                "template_type": "generic",
-                "elements": [{
-                        "title": classes[0].name + " - " + classes[0].instructor_name + " - " + classes[0].start_time,
-                        "subtitle": classes[0].description,
-                        "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
-                        "buttons": [{
-                            "type": "web_url",
-                            "url": "https://yogaia.com/view/" + classes[0].id,
-                            "title": "Book"
-                            }, {
-                            "type": "element_share"
-                        }]
-                    }, {
-                        "title": classes[1].name,
-                        "subtitle": classes[1].description,
-                        "image_url": "https://yogaia.com/" + classes[1].instructor_img ,
-                        "buttons": [{
-                            "type": "web_url",
-                            "url": "https://yogaia.com/view/" + classes[1].id,
-                            "title": "Book"
-                            }, {
-                            "type": "element_share"
-                        }]
-                    }, {
-                        "title": classes[2].name,
-                        "subtitle": classes[2].description,
-                        "image_url": "https://yogaia.com/" + classes[2].instructor_img ,
-                        "buttons": [{
-                            "type": "web_url",
-                            "url": "https://yogaia.com/view/" + classes[2].id,
-                            "title": "Book"
-                            }, {
-                            "type": "element_share"
-                        }],
-                    }]
-                }
-            }
-        };
+// send rich message with kitten
+function kittenMessage(recipientId, text) {
     
-    sendMessage(recipientId, message);
+    text = text || "";
+    var values = text.split(' ');
+    
+    if (values.length === 3 && values[0] === 'kitten') {
+        if (Number(values[1]) > 0 && Number(values[2]) > 0) {
             
-    return true;
-}
-
-/*var job = new CronJob({
-  cronTime: '30 00 00 * * * ',
-  onTick: function() {
-    sendMessage(recipientId, 'successfully scheduled');
-  	console.log('cronjob scheduled');
-  },
-  start: true
-});
-
-job.start();
-
-new CronJob('* * * * * *', function(recipientId) {
-  console.log('You will see this message every second');
-  sendMessage(recipientId, 'getting annoying yet?');
-}, null, true);
-*/
+            var imageUrl = "https://yogaia.com/view/" + classes[0].id;
+            
+            message = {
+                "attachment": {
+                    "type": "template",
+                    "payload": {
+                        "template_type": "generic",
+                        "elements": [{
+                            "title": classes[0].name,
+                            "subtitle": classes[0].description,
+                            "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
+                            "buttons": [{
+                                "type": "web_url",
+                                "url": imageUrl,
+                                "title": "Book"
+                                }, {
+                                "type": "postback",
+                                "title": "Share",
+                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                            }]
+                        }, {
+                        	"title": classes[1].name,
+                            "subtitle": classes[1].description,
+                            "image_url": "https://yogaia.com/" + classes[1].instructor_img ,
+                            "buttons": [{
+                                "type": "web_url",
+                                "url": imageUrl,
+                                "title": "Book"
+                                }, {
+                                "type": "postback",
+                                "title": "Share",
+                                "payload": "User " + recipientId + " likes kitten " + imageUrl,
+                            }],
+                        }]
+                    }
+                }
+            };
+    
+            sendMessage(recipientId, message);
+            
+            return true;
+        }
+    }
+    
+    return false;
+    
+};
