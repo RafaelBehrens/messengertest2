@@ -129,6 +129,24 @@ setGreeting();
 
 //send class data
 function classdatasend(recipientId, text) {
+	
+	var classelements = [];
+	
+	for(i=0; i<classes.length; i++){
+		var classarray = {
+			"title": classes[i].name + " - " + classes[i].instructor_name + " - " + classes[i].start_time,
+			"subtitle": classes[i].description,
+			"image_url": "https://yogaia.com/" + classes[i].instructor_img,
+			"buttons":[{
+				"type": "web_url",
+				"url": "https://yogaia.com/view/" + classes[i].id,
+				"title": "Book"
+			}, {
+				"type": "element_share"
+			}]
+		};
+		classelements.push(classarray);
+	}
             
             
     message = {
@@ -136,40 +154,7 @@ function classdatasend(recipientId, text) {
             "type": "template",
             "payload": {
                 "template_type": "generic",
-                "elements": [{
-                        "title": classes[0].name + " - " + classes[0].instructor_name + " - " + classes[0].start_time,
-                        "subtitle": classes[0].description,
-                        "image_url": "https://yogaia.com/" + classes[0].instructor_img ,
-                        "buttons": [{
-                            "type": "web_url",
-                            "url": "https://yogaia.com/view/" + classes[0].id,
-                            "title": "Book"
-                            }, {
-                            "type": "element_share"
-                        }]
-                    }, {
-                        "title": classes[1].name,
-                        "subtitle": classes[1].description,
-                        "image_url": "https://yogaia.com/" + classes[1].instructor_img ,
-                        "buttons": [{
-                            "type": "web_url",
-                            "url": "https://yogaia.com/view/" + classes[1].id,
-                            "title": "Book"
-                            }, {
-                            "type": "element_share"
-                        }]
-                    }, {
-                        "title": classes[2].name,
-                        "subtitle": classes[2].description,
-                        "image_url": "https://yogaia.com/" + classes[2].instructor_img ,
-                        "buttons": [{
-                            "type": "web_url",
-                            "url": "https://yogaia.com/view/" + classes[2].id,
-                            "title": "Book"
-                            }, {
-                            "type": "element_share"
-                        }],
-                    }]
+                "elements": classelements,
                 }
             }
         };
