@@ -9,14 +9,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
 
-/*//load unparsed JSON w class info 
-var classesUnparsed = fs.readFileSync('classes.json', 'utf8');
-
-//parse JSON appropriately
-var classes = JSON.parse(classesUnparsed);
-
-//load JSON from URL
-var classes;*/
 
 //url for classes JSON
 var url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10';
@@ -53,6 +45,14 @@ app.post('/webhook', function (req, res) {
         
         if (event.message && event.message.text) {
             classdatasend(event.sender.id);
+            var job = new CronJob({
+  			cronTime: '30 00 00 * * * ',
+  			onTick: function() {
+    			sendMessage(recipientId, 'successfully scheduled');
+  				console.log('cronjob scheduled');
+  			},
+  			start: true
+		});
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
         }
@@ -161,7 +161,8 @@ function classdatasend(recipientId) {
 
 }
 
-/*var job = new CronJob({
+/*
+var job = new CronJob({
   cronTime: '30 00 00 * * * ',
   onTick: function() {
     sendMessage(recipientId, 'successfully scheduled');
