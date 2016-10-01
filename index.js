@@ -118,7 +118,7 @@ setGreeting();
 
 
 //send class data
-function classdatasend(recipientId) {
+function classdatasend() {
 	
 	var classelements = [];
 	
@@ -149,15 +149,29 @@ function classdatasend(recipientId) {
             }
         };
     
-    sendMessage(recipientId, message);
+    return message;
 
 }
 
 var job = new CronJob({
-  cronTime: '30 00 00 * * * ',
+  cronTime: '* * * * * * ',
   onTick: function() {
-    sendMessage(recipientId, 'successfully scheduled');
-  	console.log('cronjob scheduled');
+  	classdatasend();
+  	request({
+        url: 'https://graph.facebook.com/v2.6/me/messages',
+        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
+        method: 'POST',
+        json: {
+            recipient: {id: recipientId},
+            message: message,
+        }
+    }, function(error, response, body) {
+        if (error) {
+            console.log('Error sending message: ', error);
+        } else if (response.body.error) {
+            console.log('Error: ', response.body.error);
+        }
+    });
   },
   start: true
 });
