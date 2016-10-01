@@ -45,14 +45,6 @@ app.post('/webhook', function (req, res) {
         
         if (event.message && event.message.text) {
             classdatasend(event.sender.id);
-            var job = new CronJob({
-  				cronTime: '30 00 00 * * * ',
-  				onTick: function() {
-    				sendMessage(event.sender.id, 'successfully scheduled');
-  					console.log('cronjob scheduled');
-  				},
-  				start: true
-			});
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
         }
@@ -161,7 +153,6 @@ function classdatasend(recipientId) {
 
 }
 
-/*
 var job = new CronJob({
   cronTime: '30 00 00 * * * ',
   onTick: function() {
@@ -172,7 +163,7 @@ var job = new CronJob({
 });
 
 job.start();
-
+/*
 new CronJob('* * * * * *', function(recipientId) {
   console.log('You will see this message every second');
   sendMessage(recipientId, 'getting annoying yet?');
