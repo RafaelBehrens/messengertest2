@@ -46,13 +46,13 @@ app.post('/webhook', function (req, res) {
         if (event.message && event.message.text) {
             classdatasend(event.sender.id);
             var job = new CronJob({
-  			cronTime: '30 00 00 * * * ',
-  			onTick: function() {
-    			sendMessage(recipientId, 'successfully scheduled');
-  				console.log('cronjob scheduled');
-  			},
-  			start: true
-		});
+  				cronTime: '30 00 00 * * * ',
+  				onTick: function() {
+    				sendMessage(event.sender.id, 'successfully scheduled');
+  					console.log('cronjob scheduled');
+  				},
+  				start: true
+			});
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
         }
