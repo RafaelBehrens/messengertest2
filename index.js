@@ -128,7 +128,7 @@ setGreeting();
 
 
 //send class data
-function classdatasend(recipientId, text) {
+function classdatasend(recipientId) {
 	
 	var classelements = [];
 	
@@ -160,8 +160,7 @@ function classdatasend(recipientId, text) {
         };
     
     sendMessage(recipientId, message);
-            
-    return true;
+
 }
 
 /*var job = new CronJob({
