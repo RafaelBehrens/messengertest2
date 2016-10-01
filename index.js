@@ -52,9 +52,7 @@ app.post('/webhook', function (req, res) {
         var event = events[i];
         
         if (event.message && event.message.text) {
-            if (!classdatasend(event.sender.id, event.message.text)) {
-                sendMessage(event.sender.id, {text: "Echo: " + classes[0].intensity});
-            }
+            classdatasend(event.sender.id);
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
         }
