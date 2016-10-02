@@ -98,14 +98,12 @@ app.post('/webhook', function (req, res) {
             	console.log('SenderID inserted');
         	});*/
         	var query = client.query("SELECT senderid from items");
-        	query.on("row", function (row){
-        		console.log(JSON.stringify(row.senderid));
+        		query.on("row", function (row){
+        			console.log(JSON.stringify(row.senderid));
         	});
         	query.on("end", function (result) {          
         		client.end(); 
     		});
-    };
-        	
             
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
