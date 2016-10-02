@@ -78,21 +78,20 @@ app.post('/webhook', function (req, res) {
         if (event.message && event.message.text) {
             classdatasend(event.sender.id);
             console.log(event.sender.id);
-            
-            var testmessage = "Hello Fede";
-            sendMessage(event.sender.id, testmessage);
+
+            sendMessage(event.sender.id, {text: "Hello Fede");
             const connectionString = process.env.DATABASE_URL;
 
 			const client = new pg.Client(connectionString);
 
 			client.connect();
 			
-			var query = client.query("insert into items (senderid) values ('" + event.sender.id + "')");    
+			/*var query = client.query("insert into items (senderid) values ('" + event.sender.id + "')");    
         		query.on("end", function (result) {          
             	client.end(); 
             	console.log('SenderID inserted');
-        	});
-        	var query2 = client.query("SELECT * from items");
+        	});*/
+        	var query = client.query("SELECT * from items");
         		query.on("row", function (row){
         			console.log(JSON.stringify(row));
         	});
