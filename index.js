@@ -35,11 +35,11 @@ const client = new pg.Client(connectionString);
 
 client.connect();
 
-var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid VARCHAR(40), complete BOOLEAN)');   
+/*var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid VARCHAR(40), complete BOOLEAN)');   
 query.on("end", function (result) {          
             client.end(); 
             console.log('items table created');  
-        });
+        });*/
 
 
 //url for classes JSON
@@ -90,12 +90,12 @@ app.post('/webhook', function (req, res) {
 			var query = client.query("INSERT INTO items (senderid) VALUES " + event.sender.id);    
         		query.on("end", function (result) {          
             	client.end(); 
-            	console.log('Success');
+            	console.log('SenderID inserted');
         	});
-        	/*var query2 = client.query("SELECT * from items");
+        	var query2 = client.query("SELECT * from items");
         		query.on("row", function (row){
         			console.log(JSON.stringify(row));
-        	});*/
+        	});
             
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
