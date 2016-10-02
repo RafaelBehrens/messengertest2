@@ -81,13 +81,13 @@ app.post('/webhook', function (req, res) {
 
 			client.connect();
 			
-			/*var query = client.query("INSERT INTO items (senderid) VALUES " + event.sender.id);    
+			var query = client.query("INSERT INTO items (senderid) VALUES " + event.sender.id);    
         		query.on("end", function (result) {          
             	client.end(); 
             	console.log('Success');
             	res.end();  
-        	});*/
-        	var query = client.query("SELECT * from items");
+        	});
+        	var query2 = client.query("SELECT * from items");
         		query.on("row", function (row){
         			console.log(JSON.stringify(row));
         	});
@@ -200,9 +200,9 @@ function classdatasend(recipientId) {
 
 }
 
-var fedesenderid = 1210619582313639;
+//var fedesenderid = 1210619582313639;
 
-sendMessage(fedesenderid, {text: "Hello Fede"});
+//sendMessage(fedesenderid, {text: "Hello Fede"});
 
 /*
 var job = new CronJob({
