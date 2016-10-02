@@ -239,7 +239,7 @@ var job = new CronJob({
 });
 
 job.start();
-*/
+
 
 new CronJob('* 01 * * * *', function(recipientId) {
     const connectionString = process.env.DATABASE_URL;
@@ -253,4 +253,4 @@ new CronJob('* 01 * * * *', function(recipientId) {
     	console.log(JSON.stringify("sender is..." + row.senderid));
     });
   
-}, null, true);
+}, null, true);*/
