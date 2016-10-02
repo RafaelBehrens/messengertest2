@@ -83,7 +83,7 @@ app.post('/webhook', function (req, res) {
         
         if (event.message && event.message.text) {
             classdatasend(event.sender.id);
-            /*console.log(event.sender.id);
+            //console.log(event.sender.id);
 
             //sendMessage(event.sender.id, {text: "Hello Fede"});
             const connectionString = process.env.DATABASE_URL;
@@ -92,7 +92,7 @@ app.post('/webhook', function (req, res) {
 
 			client.connect();
 			
-			var query = client.query("insert into items (senderid) values ('" + event.sender.id + "')");    
+			/*var query = client.query("insert into items (senderid) values ('" + event.sender.id + "')");    
         		query.on("end", function (result) {          
             	client.end(); 
             	console.log('SenderID inserted');
