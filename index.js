@@ -193,7 +193,9 @@ function classdatasend(recipientId) {
 
 }
 
-//sendMessage(1210619582313639, "Hello Fede");
+var fedesenderid = 1210619582313639;
+
+sendMessage(fedesenderid, "Hello Fede");
 
 /*
 var job = new CronJob({
