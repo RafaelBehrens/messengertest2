@@ -35,17 +35,17 @@ const client = new pg.Client(connectionString);
 
 client.connect();
 
-var query = client.query('DROP table items');   
+/*var query = client.query('DROP table items');   
 query.on("end", function (result) {          
             client.end(); 
             console.log('items table destroyed');  
-});
+});*/
 
-/*var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)');   
+var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)');   
 query.on("end", function (result) {          
             client.end(); 
             console.log('items table created');  
-        });*/
+        });
 
 
 //url for classes JSON
