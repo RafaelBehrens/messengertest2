@@ -36,7 +36,7 @@ const client = new pg.Client(connectionString);
 client.connect();
 
 const query = client.query(
-  'INSERT INTO items (senderid) VALUES (300)');
+  'INSERT INTO items(senderid) VALUES (300)');
 query.on('end', () => { client.end(); })
 
 //url for classes JSON
