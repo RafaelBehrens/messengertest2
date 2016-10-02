@@ -10,7 +10,7 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
 
-//connect to PostGres database
+/*//connect to PostGres database
 pg.defaults.ssl = true;
 pg.connect(process.env.DATABASE_URL, function(err, client) {
 	if (err) throw err;
@@ -24,7 +24,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
     	on("end", function (result) {          
         	client.end(); 
     	});
-});
+});*/
 
 /*client
     .query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)')
