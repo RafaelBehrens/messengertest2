@@ -103,7 +103,7 @@ app.post('/webhook', function (req, res) {
         	});
         	query.on("end", function (result) {          
         		client.end(); 
-        	});
+        	};
     });
         	
             
