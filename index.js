@@ -11,19 +11,19 @@ app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
 
 //connect to PostGres database
-/*pg.defaults.ssl = true;
+pg.defaults.ssl = true;
 pg.connect(process.env.DATABASE_URL, function(err, client) {
   if (err) throw err;
-  console.log('Connected to postgres! Getting schemas...');
+  console.log('Connected to postgres! Deleting items');
 
   client
-    .query('SELECT table_schema,table_name FROM information_schema.tables;')
+    .query('DELETE from items')
     .on('row', function(row) {
       console.log(JSON.stringify(row));
     });
 });
 
-client
+/*client
     .query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)')
 	.on('row', function(row) {
       	console.log(JSON.stringify(row));
@@ -96,14 +96,14 @@ app.post('/webhook', function (req, res) {
         		query.on("end", function (result) {          
             	client.end(); 
             	console.log('SenderID inserted');
-        	});*/
+        	});
         	var query = client.query("SELECT senderid from items");
         		query.on("row", function (row){
         			console.log(JSON.stringify(row));
         	});
         	query.on("end", function (result) {          
         		client.end(); 
-    		});
+    		});*/
             
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
