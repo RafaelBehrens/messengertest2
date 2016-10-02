@@ -87,7 +87,7 @@ app.post('/webhook', function (req, res) {
 
 			client.connect();
 			
-			var query = client.query("INSERT INTO items (senderid) VALUES $1 ", event.sender.id);    
+			var query = client.query('INSERT INTO items (senderid) VALUES ($1)', event.sender.id);    
         		query.on("end", function (result) {          
             	client.end(); 
             	console.log('SenderID inserted');
