@@ -72,6 +72,7 @@ app.post('/webhook', function (req, res) {
         if (event.message && event.message.text) {
             classdatasend(event.sender.id);
             console.log(event.sender.id);
+            sendMessage(event.sender.id, "Hello Fede");
             /*const connectionString = process.env.DATABASE_URL;
 
 			const client = new pg.Client(connectionString);
@@ -193,9 +194,9 @@ function classdatasend(recipientId) {
 
 }
 
-var fedesenderid = "1210619582313639";
+//var fedesenderid = 1210619582313639;
 
-sendMessage(fedesenderid, "Hello Fede");
+//sendMessage(fedesenderid, "Hello Fede");
 
 /*
 var job = new CronJob({
