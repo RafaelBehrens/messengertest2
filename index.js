@@ -86,13 +86,13 @@ app.post('/webhook', function (req, res) {
             //console.log(event.sender.id);
 
             //sendMessage(event.sender.id, {text: "Hello Fede"});
-            const connectionString = process.env.DATABASE_URL;
+            /*const connectionString = process.env.DATABASE_URL;
 
 			const client = new pg.Client(connectionString);
 
 			client.connect();
 			
-			/*var query = client.query("insert into items (senderid) values ('" + event.sender.id + "')");    
+			var query = client.query("insert into items (senderid) values ('" + event.sender.id + "')");    
         		query.on("end", function (result) {          
             	client.end(); 
             	console.log('SenderID inserted');
