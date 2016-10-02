@@ -35,10 +35,10 @@ const client = new pg.Client(connectionString);
 
 client.connect();
 
-var query = client.query("Drop TABLE items");   
+var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid VARCHAR(40), complete BOOLEAN)');   
 query.on("end", function (result) {          
             client.end(); 
-            console.log('Table Schema Deleted');  
+            console.log('items table created');  
         });
 
 
