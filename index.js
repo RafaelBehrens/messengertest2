@@ -21,6 +21,14 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
     .on('row', function(row) {
       console.log(JSON.stringify(row));
     });
+    client
+    	.query("SELECT senderid from items");
+        .on("row", function (row){
+        	console.log(JSON.stringify(row));
+        });
+    	.on("end", function (result) {          
+        	client.end(); 
+    	});
 });
 
 /*client
