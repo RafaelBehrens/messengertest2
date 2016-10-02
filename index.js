@@ -39,6 +39,13 @@ const query = client.query(
   'INSERT INTO items(senderid) VALUES (300)');
 query.on('end', () => { client.end(); })
 
+const query2 = client.query(
+  'SELECT senderid FROM items');
+query.on('row', function(row) {
+      console.log(JSON.stringify(row));
+    });
+
+
 //url for classes JSON
 var url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10';
 
