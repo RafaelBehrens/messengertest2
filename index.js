@@ -18,7 +18,7 @@ pg.connect(process.env.DATABASE_URL, function(err, client) {
 
   client
     .query(
-  		'CREATE TABLE items(id SERIAL PRIMARY KEY, senderid NUMBER(20), complete BOOLEAN)')
+  		'CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)')
 	.on('row', function(row) {
       	console.log(JSON.stringify(row));
     });
