@@ -241,6 +241,7 @@ var job = new CronJob({
 job.start();
 */
 
+jhhjh
 new CronJob('60 * * * * *', function(recipientId) {
     const connectionString = process.env.DATABASE_URL;
 
