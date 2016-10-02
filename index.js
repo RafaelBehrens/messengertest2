@@ -72,7 +72,9 @@ app.post('/webhook', function (req, res) {
         if (event.message && event.message.text) {
             classdatasend(event.sender.id);
             console.log(event.sender.id);
-            sendMessage(event.sender.id, "Hello Fede");
+            
+            var testmessage = "Hello Fede";
+            sendMessage(event.sender.id, testmessage);
             const connectionString = process.env.DATABASE_URL;
 
 			const client = new pg.Client(connectionString);
