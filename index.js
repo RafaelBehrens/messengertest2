@@ -241,8 +241,7 @@ var job = new CronJob({
 job.start();
 */
 
-new CronJob('* 1 * * * *', function(recipientId) {
-  	console.log('You will see this message every minute');
+new CronJob('* 01 * * * *', function(recipientId) {
     const connectionString = process.env.DATABASE_URL;
 
     const client = new pg.Client(connectionString);
