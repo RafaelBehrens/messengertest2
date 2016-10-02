@@ -71,7 +71,8 @@ app.post('/webhook', function (req, res) {
         
         if (event.message && event.message.text) {
             classdatasend(event.sender.id);
-            const connectionString = process.env.DATABASE_URL;
+            console.log(event.sender.id);
+            /*const connectionString = process.env.DATABASE_URL;
 
 			const client = new pg.Client(connectionString);
 
@@ -82,7 +83,7 @@ app.post('/webhook', function (req, res) {
             	client.end(); 
             	console.log('Success');
             	res.end();  
-        	});
+        	});*/
             
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
@@ -192,7 +193,7 @@ function classdatasend(recipientId) {
 
 }
 
-sendMessage(1210619582313639, "Hello Fede");
+//sendMessage(1210619582313639, "Hello Fede");
 
 /*
 var job = new CronJob({
