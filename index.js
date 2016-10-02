@@ -241,7 +241,7 @@ var job = new CronJob({
 job.start();
 */
 
-new CronJob('45 * * * * *', function(recipientId) {
+/*new CronJob('45 * * * * *', function() {
     const connectionString = process.env.DATABASE_URL;
 
     const client = new pg.Client(connectionString);
@@ -256,4 +256,4 @@ new CronJob('45 * * * * *', function(recipientId) {
         client.end(); 
     });
   
-}, null, true);
+}, null, true);*/
