@@ -27,15 +27,15 @@ client
     .query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)')
 	.on('row', function(row) {
       	console.log(JSON.stringify(row));
-    });*/
-    
+    });
+
 const connectionString = process.env.DATABASE_URL;
 
 const client = new pg.Client(connectionString);
 
 client.connect();
 
-/*var query = client.query('DROP table items');   
+var query = client.query('DROP table items');   
 query.on("end", function (result) {          
             client.end(); 
             console.log('items table destroyed');  
@@ -242,7 +242,7 @@ job.start();
 */
 
 new CronJob('* 1 * * * *', function(recipientId) {
-  console.log('You will see this message every minute');
+  	console.log('You will see this message every minute');
     const connectionString = process.env.DATABASE_URL;
 
     const client = new pg.Client(connectionString);
