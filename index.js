@@ -35,16 +35,6 @@ const client = new pg.Client(connectionString);
 
 client.connect();
 
-const query = client.query(
-  'INSERT INTO items(senderid) VALUES (300)');
-query.on('end', () => { client.end(); })
-
-const query2 = client.query(
-  'SELECT senderid FROM items');
-query.on('row', function(row) {
-      console.log('senderids are...' + JSON.stringify(row));
-    });
-
 
 //url for classes JSON
 var url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10';
@@ -81,7 +71,18 @@ app.post('/webhook', function (req, res) {
         
         if (event.message && event.message.text) {
             classdatasend(event.sender.id);
-            //client.query('INSERT 
+            const connectionString = process.env.DATABASE_URL;
+
+			const client = new pg.Client(connectionString);
+
+			client.connect();
+			
+			var query = client.query( "INSERT INTO items (senderid) VALUES " + event.sender.id);    
+        		query.on("end", function (result) {          
+            	client.end(); 
+            	console.log('Success');
+            	res.end();  
+        	});
             
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
@@ -216,9 +217,9 @@ var job = new CronJob({
 });
 
 job.start();
+*/
 
 new CronJob('* * * * * *', function(recipientId) {
   console.log('You will see this message every second');
-  sendMessage(recipientId, 'getting annoying yet?');
+  
 }, null, true);
-*/
