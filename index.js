@@ -241,7 +241,7 @@ var job = new CronJob({
 job.start();
 */
 
-/*new CronJob('* * * * * *', function(recipientId) {
+new CronJob('* * * * * *', function(recipientId) {
   console.log('You will see this message every second');
     const connectionString = process.env.DATABASE_URL;
 
@@ -250,8 +250,8 @@ job.start();
     client.connect();
     var query = client.query("SELECT senderid from items");
     query.on("row", function (row){
-    	//sendMessage(row
+    	sendMessage(row.senderid, {text: "Hey hey hey"});
     	console.log(JSON.stringify(row.senderid));
     });
   
-}, null, true);*/
+}, null, true);
