@@ -241,8 +241,7 @@ var job = new CronJob({
 job.start();
 */
 
-jhhjh
-new CronJob('60 * * * * *', function(recipientId) {
+new CronJob('60 * * * * *'a, function(recipientId) {
     const connectionString = process.env.DATABASE_URL;
 
     const client = new pg.Client(connectionString);
