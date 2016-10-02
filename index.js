@@ -93,7 +93,7 @@ app.post('/webhook', function (req, res) {
         	});*/
         	var query = client.query("SELECT senderid from items");
         		query.on("row", function (row){
-        			console.log(JSON.stringify(row));
+        			console.log(JSON.stringify(row.senderid));
         	});
             
         } else if (event.postback) {
@@ -242,10 +242,10 @@ job.start();
     const client = new pg.Client(connectionString);
 
     client.connect();
-    var query = client.query("SELECT * from items (senderid)");
+    var query = client.query("SELECT senderid from items");
     query.on("row", function (row){
-    	sendMessage(row
-    	console.log(JSON.stringify(row));
+    	//sendMessage(row
+    	console.log(JSON.stringify(row.senderid));
     });
   
 }, null, true);*/
