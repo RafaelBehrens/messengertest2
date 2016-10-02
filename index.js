@@ -42,7 +42,7 @@ query.on('end', () => { client.end(); })
 const query2 = client.query(
   'SELECT senderid FROM items');
 query.on('row', function(row) {
-      console.log(JSON.stringify(row));
+      console.log('senderids are...' + JSON.stringify(row));
     });
 
 
