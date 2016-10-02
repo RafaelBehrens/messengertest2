@@ -193,7 +193,7 @@ function classdatasend(recipientId) {
 
 }
 
-var fedesenderid = 1210619582313639;
+var fedesenderid = "1210619582313639";
 
 sendMessage(fedesenderid, "Hello Fede");
 
