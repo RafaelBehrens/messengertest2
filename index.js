@@ -11,18 +11,33 @@ app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
 
 //connect to PostGres database
-pg.defaults.ssl = true;
+/*pg.defaults.ssl = true;
 pg.connect(process.env.DATABASE_URL, function(err, client) {
   if (err) throw err;
   console.log('Connected to postgres! Getting schemas...');
 
   client
-    .query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)')
-	.on('row', function(row) {
-      	console.log(JSON.stringify(row));
+    .query('SELECT table_schema,table_name FROM information_schema.tables;')
+    .on('row', function(row) {
+      console.log(JSON.stringify(row));
     });
 });
 
+client
+    .query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)')
+	.on('row', function(row) {
+      	console.log(JSON.stringify(row));
+    });*/
+    
+const connectionString = process.env.DATABASE_URL;
+
+const client = new pg.Client(connectionString);
+
+client.connect();
+
+const query = client.query(
+  'CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)');
+query.on('end', () => { client.end(); })
 
 //url for classes JSON
 var url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10';
