@@ -241,7 +241,7 @@ var job = new CronJob({
 job.start();
 */
 
-new CronJob('* * * * * *', function(recipientId) {
+new CronJob('30 * * * * *', function(recipientId) {
   console.log('You will see this message every second');
     const connectionString = process.env.DATABASE_URL;
 
