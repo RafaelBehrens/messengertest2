@@ -83,9 +83,9 @@ app.post('/webhook', function (req, res) {
         
         if (event.message && event.message.text) {
             classdatasend(event.sender.id);
-            console.log(event.sender.id);
+            /*console.log(event.sender.id);
 
-            sendMessage(event.sender.id, {text: "Hello Fede"});
+            //sendMessage(event.sender.id, {text: "Hello Fede"});
             const connectionString = process.env.DATABASE_URL;
 
 			const client = new pg.Client(connectionString);
@@ -97,7 +97,7 @@ app.post('/webhook', function (req, res) {
             	client.end(); 
             	console.log('SenderID inserted');
         	});
-        	/*var query = client.query("SELECT senderid from items");
+        	var query = client.query("SELECT senderid from items");
         		query.on("row", function (row){
         			console.log(JSON.stringify(row.senderid));
         	});*/
@@ -241,8 +241,8 @@ var job = new CronJob({
 job.start();
 */
 
-new CronJob('30 * * * * *', function(recipientId) {
-  console.log('You will see this message every second');
+new CronJob('* 1 * * * *', function(recipientId) {
+  console.log('You will see this message every minute');
     const connectionString = process.env.DATABASE_URL;
 
     const client = new pg.Client(connectionString);
@@ -251,7 +251,7 @@ new CronJob('30 * * * * *', function(recipientId) {
     var query = client.query("SELECT senderid from items");
     query.on("row", function (row){
     	sendMessage(row.senderid, {text: "Hey once in a while"});
-    	console.log(JSON.stringify(row.senderid));
+    	console.log(JSON.stringify("sender is..." + row.senderid));
     });
   
 }, null, true);
