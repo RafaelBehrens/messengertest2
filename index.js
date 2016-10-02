@@ -36,7 +36,7 @@ const client = new pg.Client(connectionString);
 client.connect();
 
 const query = client.query(
-  'CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)');
+  'INSERT INTO items (senderid) VALUES (300, 400)');
 query.on('end', () => { client.end(); })
 
 //url for classes JSON
