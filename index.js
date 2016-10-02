@@ -35,6 +35,13 @@ const client = new pg.Client(connectionString);
 
 client.connect();
 
+var query = client.query("Drop TABLE items");   
+query.on("end", function (result) {          
+            client.end(); 
+            console.log('Table Schema Deleted');
+            res.end();  
+        });
+
 
 //url for classes JSON
 var url = 'https://yogaia.com/api/lessons?upcoming=0&limit=10';
