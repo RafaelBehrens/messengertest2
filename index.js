@@ -239,9 +239,9 @@ var job = new CronJob({
 });
 
 job.start();
+*/
 
-
-new CronJob('* 01 * * * *', function(recipientId) {
+new CronJob('60 * * * * *', function(recipientId) {
     const connectionString = process.env.DATABASE_URL;
 
     const client = new pg.Client(connectionString);
@@ -252,5 +252,8 @@ new CronJob('* 01 * * * *', function(recipientId) {
     	sendMessage(row.senderid, {text: "Hey once in a while"});
     	console.log(JSON.stringify("sender is..." + row.senderid));
     });
+    query.on("end", function (result) {          
+        client.end(); 
+    });
   
-}, null, true);*/
+}, null, true);
