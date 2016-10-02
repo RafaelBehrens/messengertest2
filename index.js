@@ -91,7 +91,7 @@ app.post('/webhook', function (req, res) {
             	client.end(); 
             	console.log('SenderID inserted');
         	});*/
-        	var query = client.query("SELECT * from items");
+        	var query = client.query("SELECT * from items (senderid)");
         		query.on("row", function (row){
         			console.log(JSON.stringify(row));
         	});
@@ -234,8 +234,18 @@ var job = new CronJob({
 
 job.start();
 */
-/*
-new CronJob('* * * * * *', function(recipientId) {
+
+/*new CronJob('* * * * * *', function(recipientId) {
   console.log('You will see this message every second');
+    const connectionString = process.env.DATABASE_URL;
+
+    const client = new pg.Client(connectionString);
+
+    client.connect();
+    var query = client.query("SELECT * from items (senderid)");
+    query.on("row", function (row){
+    	sendMessage(row
+    	console.log(JSON.stringify(row));
+    });
   
 }, null, true);*/
