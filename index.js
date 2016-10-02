@@ -250,7 +250,7 @@ new CronJob('* * * * * *', function(recipientId) {
     client.connect();
     var query = client.query("SELECT senderid from items");
     query.on("row", function (row){
-    	sendMessage(row, {text: "Hello Fede"});
+    	sendMessage(row.senderid, {text: "Hey hey hey"});
     	console.log(JSON.stringify(row.senderid));
     });
   
