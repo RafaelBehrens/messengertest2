@@ -218,8 +218,8 @@ var job = new CronJob({
 
 job.start();
 */
-
+/*
 new CronJob('* * * * * *', function(recipientId) {
   console.log('You will see this message every second');
   
-}, null, true);
+}, null, true);*/
