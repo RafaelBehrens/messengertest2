@@ -91,7 +91,7 @@ app.post('/webhook', function (req, res) {
             	client.end(); 
             	console.log('SenderID inserted');
         	});*/
-        	var query = client.query("SELECT * from items (senderid)");
+        	var query = client.query("SELECT * from items");
         		query.on("row", function (row){
         			console.log(JSON.stringify(row));
         	});
