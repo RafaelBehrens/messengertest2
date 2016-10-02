@@ -13,20 +13,15 @@ app.listen((process.env.PORT || 3000));
 //connect to PostGres database
 pg.defaults.ssl = true;
 pg.connect(process.env.DATABASE_URL, function(err, client) {
-  if (err) throw err;
-  console.log('Connected to postgres! Deleting items');
+	if (err) throw err;
+  	console.log('Connected to postgres! Deleting items');
 
-  client
-    .query('DELETE from items')
-    .on('row', function(row) {
-      console.log(JSON.stringify(row));
-    });
     client
     	.query("SELECT senderid from items");
         .on("row", function (row){
         	console.log(JSON.stringify(row));
         });
-    	.on("end", function (result) {          
+    	on("end", function (result) {          
         	client.end(); 
     	});
 });
