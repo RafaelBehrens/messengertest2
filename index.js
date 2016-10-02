@@ -38,8 +38,7 @@ client.connect();
 var query = client.query("Drop TABLE items");   
 query.on("end", function (result) {          
             client.end(); 
-            console.log('Table Schema Deleted');
-            res.end();  
+            console.log('Table Schema Deleted');  
         });
 
 
