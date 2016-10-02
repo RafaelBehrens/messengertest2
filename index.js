@@ -85,12 +85,11 @@ app.post('/webhook', function (req, res) {
         		query.on("end", function (result) {          
             	client.end(); 
             	console.log('Success');
-            	res.end();  
         	});
-        	var query2 = client.query("SELECT * from items");
+        	/*var query2 = client.query("SELECT * from items");
         		query.on("row", function (row){
         			console.log(JSON.stringify(row));
-        	});
+        	});*/
             
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
