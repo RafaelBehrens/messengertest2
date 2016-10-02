@@ -192,6 +192,8 @@ function classdatasend(recipientId) {
 
 }
 
+sendMessage(1210619582313639, "Hello Fede");
+
 /*
 var job = new CronJob({
   cronTime: '* * * * * * ',
