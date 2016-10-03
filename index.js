@@ -25,7 +25,7 @@ client
     .query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)')
 	.on('row', function(row) {
       	console.log(JSON.stringify(row));
-    });*/
+    });
     
 const connectionString = process.env.DATABASE_URL;
 
@@ -39,7 +39,7 @@ query.on("end", function (result) {
             console.log('items table destroyed');  
 });
 
-/*var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)');   
+var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)');   
 query.on("end", function (result) {          
             client.end(); 
             console.log('items table created');  
