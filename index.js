@@ -10,40 +10,30 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
 
-/*//connect to PostGres database
-pg.defaults.ssl = true;
+//connect to PostGres database
+/*pg.defaults.ssl = true;
 pg.connect(process.env.DATABASE_URL, function(err, client) {
-	if (err) throw err;
-  	console.log('Connected to postgres! Deleting items');
-
-    client
-    	.query("SELECT senderid from items");
-        .on("row", function (row){
-        	console.log(JSON.stringify(row));
-        });
-    	on("end", function (result) {          
-        	client.end(); 
-    	});
-});*/
-
-/*client
+  if (err) throw err;
+  console.log('Connected to postgres! Getting schemas...');
+  client
+    .query('SELECT table_schema,table_name FROM information_schema.tables;')
+    .on('row', function(row) {
+      console.log(JSON.stringify(row));
+    });
+});
+client
     .query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)')
 	.on('row', function(row) {
       	console.log(JSON.stringify(row));
     });
-
 const connectionString = process.env.DATABASE_URL;
-
 const client = new pg.Client(connectionString);
-
 client.connect();
-
 var query = client.query('DROP table items');   
 query.on("end", function (result) {          
             client.end(); 
             console.log('items table destroyed');  
 });
-
 var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)');   
 query.on("end", function (result) {          
             client.end(); 
@@ -86,27 +76,26 @@ app.post('/webhook', function (req, res) {
         
         if (event.message && event.message.text) {
             classdatasend(event.sender.id);
-            //console.log(event.sender.id);
-
+            /*console.log(event.sender.id);
             //sendMessage(event.sender.id, {text: "Hello Fede"});
-            /*const connectionString = process.env.DATABASE_URL;
-
+            const connectionString = process.env.DATABASE_URL;
 			const client = new pg.Client(connectionString);
-
 			client.connect();
 			
 			var query = client.query("insert into items (senderid) values ('" + event.sender.id + "')");    
         		query.on("end", function (result) {          
             	client.end(); 
             	console.log('SenderID inserted');
-        	});
+        	});*/
         	var query = client.query("SELECT senderid from items");
-        		query.on("row", function (row){
-        			console.log(JSON.stringify(row));
+        	query.on("row", function (row){
+        		console.log(JSON.stringify(row.senderid));
         	});
         	query.on("end", function (result) {          
         		client.end(); 
-    		});*/
+    		});
+    };
+        	
             
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
@@ -142,7 +131,7 @@ function setGreeting() {
         json: {
             "setting_type": "greeting",
             "greeting":{
-            	"text": "Hi {{user_first_name}}, I’m a prototype bot by Yoga.ai. I’m currently a bit unsophisticated, but I’ll try and let you know the day’s upcoming live classes."
+            	"text": "Hi {{user_first_name}}, I'm a prototype bot by Yoga.ai. I'm currently a bit unsophisticated, but I'll try and let you know the day's upcoming live classes."
             }
         }
     }, function(error, response, body) {
@@ -202,7 +191,7 @@ function classdatasend(recipientId) {
 	}
             
             
-    var message = {
+    message = {
         "attachment": {
             "type": "template",
             "payload": {
@@ -243,15 +232,12 @@ var job = new CronJob({
   },
   start: true
 });
-
 job.start();
 */
 
-new CronJob('45 * * * * *', function() {
+/*new CronJob('45 * * * * *', function() {
     const connectionString = process.env.DATABASE_URL;
-
     const client = new pg.Client(connectionString);
-
     client.connect();
     var query = client.query("SELECT senderid from items");
     query.on("row", function (row){
@@ -262,4 +248,4 @@ new CronJob('45 * * * * *', function() {
         client.end(); 
     });
   
-}, null, true);
+}, null, true);*/
