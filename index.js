@@ -10,45 +10,6 @@ app.use(bodyParser.urlencoded({extended: false}));
 app.use(bodyParser.json());
 app.listen((process.env.PORT || 3000));
 
-/*//connect to PostGres database
-pg.defaults.ssl = true;
-pg.connect(process.env.DATABASE_URL, function(err, client) {
-	if (err) throw err;
-  	console.log('Connected to postgres! Deleting items');
-
-    client
-    	.query("SELECT senderid from items");
-        .on("row", function (row){
-        	console.log(JSON.stringify(row));
-        });
-    	on("end", function (result) {          
-        	client.end(); 
-    	});
-});*/
-
-/*client
-    .query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)')
-	.on('row', function(row) {
-      	console.log(JSON.stringify(row));
-    });
-
-const connectionString = process.env.DATABASE_URL;
-
-const client = new pg.Client(connectionString);
-
-client.connect();
-
-var query = client.query('DROP table items');   
-query.on("end", function (result) {          
-            client.end(); 
-            console.log('items table destroyed');  
-});
-
-var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)');   
-query.on("end", function (result) {          
-            client.end(); 
-            console.log('items table created');  
-        });*/
 
 
 //url for classes JSON
@@ -89,7 +50,7 @@ app.post('/webhook', function (req, res) {
             //console.log(event.sender.id);
 
             //sendMessage(event.sender.id, {text: "Hello Fede"});
-            /*const connectionString = process.env.DATABASE_URL;
+            const connectionString = process.env.DATABASE_URL;
 
 			const client = new pg.Client(connectionString);
 
@@ -134,6 +95,7 @@ function sendMessage(recipientId, message) {
     });
 };
 
+//set greeting for users that open the app
 function setGreeting() {
 	request({
         url: 'https://graph.facebook.com/v2.6/1119887924743051/thread_settings',
@@ -155,29 +117,6 @@ function setGreeting() {
 };
 
 setGreeting();
-
-//add get started button for first use
-/*function setStartButton() {
-	request({
-        url: 'https://graph.facebook.com/v2.6/1119887924743051/thread_settings',
-        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-        method: 'POST',
-        json: {
-            "setting_type":"call_to_actions",
-  			"thread_state":"new_thread",
-  			"call_to_actions":[{
-      			"payload":"USER_DEFINED_PAYLOAD"
-    		}]
-            }
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending message: ', error);
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error);
-        }
-    });
-};*/
 
 
 //send class data
@@ -216,38 +155,9 @@ function classdatasend(recipientId) {
 
 }
 
-//var fedesenderid = 1210619582313639;
 
-//sendMessage(fedesenderid, {text: "Hello Fede"});
-
-/*
-var job = new CronJob({
-  cronTime: '* * * * * * ',
-  onTick: function() {
-  	classdatasend();
-  	request({
-        url: 'https://graph.facebook.com/v2.6/me/messages',
-        qs: {access_token: process.env.PAGE_ACCESS_TOKEN},
-        method: 'POST',
-        json: {
-            recipient: {id: recipientId},
-            message: message,
-        }
-    }, function(error, response, body) {
-        if (error) {
-            console.log('Error sending message: ', error);
-        } else if (response.body.error) {
-            console.log('Error: ', response.body.error);
-        }
-    });
-  },
-  start: true
-});
-
-job.start();
-*/
-
-/*new CronJob('45 * * * * *', function() {
+//schedule message every 45 seconds, query database to send to senderID
+new CronJob('45 * * * * *', function() {
     const connectionString = process.env.DATABASE_URL;
 
     const client = new pg.Client(connectionString);
@@ -262,4 +172,4 @@ job.start();
         client.end(); 
     });
   
-}, null, true);*/
+}, null, true);
