@@ -27,6 +27,17 @@ client
       	console.log(JSON.stringify(row));
     });*/
     
+const connectionString = process.env.DATABASE_URL;
+
+const client = new pg.Client(connectionString);
+
+client.connect();
+
+var query = client.query('DROP table items');   
+query.on("end", function (result) {          
+            client.end(); 
+            console.log('items table destroyed');  
+});
 
 /*var query = client.query('CREATE TABLE items(id SERIAL PRIMARY KEY, senderid BIGINT, complete BOOLEAN)');   
 query.on("end", function (result) {          
@@ -76,17 +87,17 @@ app.post('/webhook', function (req, res) {
 	    
 	       	const client = new pg.Client(connectionString);
  		
-		client.connect();
+			/*client.connect();
 			
-		/*var query = client.query("insert into items (senderid) values ('" + event.sender.id + "')");    
+			var query = client.query("insert into items (senderid) values ('" + event.sender.id + "')");    
         	query.on("end", function (result) {          
             	client.end(); 
             	console.log('SenderID inserted');
-        	});*/
+        	});
         	var query = client.query("SELECT senderid from items");
         	query.on("row", function (row){
         	    console.log(JSON.stringify(row.senderid));
-        	});
+        	});*/
             
         } else if (event.postback) {
             console.log("Postback received: " + JSON.stringify(event.postback));
